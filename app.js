@@ -5,7 +5,7 @@ var express = require('express'),
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.send("Landing Page");
+    res.render("Landing");
 });
 
 app.listen(port, () => {
