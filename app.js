@@ -42,62 +42,6 @@ var express = require('express'),
             name: "Willow Down Falls",
             image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
         },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
-        {
-            name: "Willow Down Falls",
-            image: "https://photosforclass.com/download/pixabay-4303359?webUrl=https%3A%2F%2Fpixabay.com%2Fget%2F52e3d5404957a514f6da8c7dda793f7f1636dfe2564c704c73297fdd934ac25c_960.jpg&user=chanwity"
-        },
     ];
 
 app.use(bodyParser.urlencoded({
