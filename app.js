@@ -12,8 +12,21 @@ var express = require('express'),
     Campground = mongoose.model("Campground", campgroundSchema);
 
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {
-    useNewUrlParser: true
+    useNewUrlParser: true,
 });
+
+// Campground.create({
+//     name: "Willow Way Creek",
+//     image: "https://cdn.pixabay.com/photo/2016/02/18/22/16/tent-1208201_960_720.jpg",
+//     description: "Greatest place on earth!!!!!!"
+// }, (err, campground) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log("newly created campground: ")
+//         console.log(campground);
+//     }
+// });
 
 app.use(bodyParser.urlencoded({
     extended: true,
@@ -21,7 +34,8 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
-    res.render("Landing");
+    // res.render("Landing");
+    res.redirect('/campgrounds');
 });
 
 // INDEX - Show all campgrounds.
@@ -31,7 +45,7 @@ app.get('/campgrounds', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            res.render('campgrounds', {
+            res.render('index', {
                 campgrounds: campgrounds,
             });
         }
@@ -43,9 +57,11 @@ app.post('/campgrounds', (req, res) => {
     // get data from form and add to campgrounds array.
     var name = req.body.name,
         image = req.body.image,
+        desc = req.body.description,
         newCamp = {
             name: name,
-            image: image
+            image: image,
+            description: des,
         };
     // create new campground and save to DB.
     Campground.create(newCamp, (err, campground) => {
@@ -68,8 +84,16 @@ app.get('/campgrounds/new', (req, res) => {
 // SHOW
 app.get('/campgrounds/:id', (req, res) => {
     // Find campground with provided ID.
-    // Rander show template with the campground.
-    res.send("This will be the show page one day!");
+    Campground.findById(req.params.id, (err, campground) => {
+        if (err) {
+            console.log(err);
+        } else {
+            // Rander show template with the campground.
+            res.render('show', {
+                campground: campground,
+            });
+        }
+    });
 });
 
 app.listen(port, () => {
