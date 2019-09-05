@@ -2,15 +2,11 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     app = express(),
-    port = 4030,
-    // SCHEMA SETUP.
-    campgroundSchema = new mongoose.Schema({
-        name: String,
-        image: String,
-        description: String,
-    }),
-    Campground = mongoose.model("Campground", campgroundSchema);
+    port = 4030
+    Campground = require('./models/campground'),
+    seedDB = require('./seeds');
 
+seedDB();
 mongoose.connect("mongodb://localhost:27017/yelp_camp", {
     useNewUrlParser: true,
 });
