@@ -61,7 +61,7 @@ app.post('/campgrounds', (req, res) => {
         newCamp = {
             name: name,
             image: image,
-            description: des,
+            description: desc,
         };
     // create new campground and save to DB.
     Campground.create(newCamp, (err, campground) => {
