@@ -2,7 +2,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
     app = express(),
-    port = 4030
+    port = 4030,
     Campground = require('./models/campground'),
     seedDB = require('./seeds');
 
