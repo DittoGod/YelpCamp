@@ -38,7 +38,7 @@ function seedDB() {
             console.log("removed comments!");
             //add a few campgrounds
             data.forEach(function (seed) {
-                Campground.create(seed, function (err, campground) {
+                Campground.create(seed, (err, campground) => {
                     if (err) {
                         console.log(err)
                     } else {
@@ -47,7 +47,7 @@ function seedDB() {
                         Comment.create({
                             text: "This place is great, but I wish there was internet",
                             author: "Homer"
-                        }, function (err, comment) {
+                        }, (err, comment) => {
                             if (err) {
                                 console.log(err);
                             } else {
@@ -55,6 +55,8 @@ function seedDB() {
                                 campground.save();
                                 console.log("Created new comment");
                             }
+                            // console.log('----------------------------');
+                            // console.log(campground);
                         });
                     }
                 });
