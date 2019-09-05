@@ -1,6 +1,6 @@
 #YelpCamp
 
-![wakatime Coding Activity](https://wakatime.com/share/@c4e6b26b-75ec-47f1-a075-fb5fcce0cbed/dc723c0e-a55f-4665-9e4a-a501f0fa0bb7.svg)
+![wakatime Coding Activity](https://wakatime.com/share/@c4e6b26b-75ec-47f1-a075-fb5fcce0cbed/86729fe9-7f1a-4f57-904c-f5139e81f4e8.svg)
 ![wakatime Languages](https://wakatime.com/share/@c4e6b26b-75ec-47f1-a075-fb5fcce0cbed/c100f6f0-0439-4b66-93d4-c9985f228e0c.svg)
 
 ##Initial Setup
