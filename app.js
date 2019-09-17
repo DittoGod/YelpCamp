@@ -143,7 +143,9 @@ app.get('/register', (req, res) => {
 });
 // will handle the signup logic.
 app.post('/register', (req, res) => {
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({
+        username: req.body.username
+    });
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
             console.log(err);
@@ -153,6 +155,17 @@ app.post('/register', (req, res) => {
             res.redirect('/campgrounds');
         });
     });
+});
+
+// Will display the login page
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+// Will handle login logic.
+app.post('/login', passport.authenticate('local', {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+}), (req, res) => {
 });
 
 app.listen(port, (err) => {
