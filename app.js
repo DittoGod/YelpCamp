@@ -69,7 +69,7 @@ app.post('/campgrounds', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log('new campground added: \n', campground);
+            // console.log('new campground added: \n', campground);
             // redirect to campground post.
             res.redirect('/campgrounds');
         }
@@ -88,7 +88,7 @@ app.get('/campgrounds/:id', (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log('Campgroud requested: \n', campground);
+            // console.log('Campgroud requested: \n', campground);
             // Rander show template with the campground.
             res.render('campgrounds/show', {
                 campground: campground,
@@ -100,7 +100,7 @@ app.get('/campgrounds/:id', (req, res) => {
 //=====================
 // Comments Routes
 //=====================
-app.get('/campgrounds/:id/comments/new', (req, res) => {
+app.get('/campgrounds/:id/comments/new', isLoggedIn, (req, res) => {
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
             console.log(err);
@@ -112,7 +112,7 @@ app.get('/campgrounds/:id/comments/new', (req, res) => {
     });
 });
 
-app.post('/campgrounds/:id/comments', (req, res) => {
+app.post('/campgrounds/:id/comments', isLoggedIn, (req, res) => {
     // lookup campground using ID
     Campground.findById(req.params.id, (err, campground) => {
         if (err) {
@@ -138,6 +138,7 @@ app.post('/campgrounds/:id/comments', (req, res) => {
 // ======================
 // Auth Routes
 // ======================
+// Will display the Sign Up page
 app.get('/register', (req, res) => {
     res.render('register');
 });
@@ -156,7 +157,6 @@ app.post('/register', (req, res) => {
         });
     });
 });
-
 // Will display the login page
 app.get('/login', (req, res) => {
     res.render('login');
@@ -165,8 +165,19 @@ app.get('/login', (req, res) => {
 app.post('/login', passport.authenticate('local', {
     successRedirect: "/campgrounds",
     failureRedirect: "/login"
-}), (req, res) => {
+}), (req, res) => {});
+// logout route
+app.get('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/campgrounds');
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 app.listen(port, (err) => {
     if (err) {
