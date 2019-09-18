@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 
 const router = express.Router();
@@ -32,19 +33,24 @@ router.post('/', isLoggedIn, (req, res) => {
   const {
     name,
     image,
+    description,
   } = req.body;
-  const desc = req.body.description;
+  const author = {
+    id: req.user._id,
+    username: req.user.username,
+  };
   const newCamp = {
     name,
     image,
-    description: desc,
+    description,
+    author,
   };
   // create new campground and save to DB.
-  Campground.create(newCamp, (err) => {
+  Campground.create(newCamp, (err, camp) => {
     if (err) {
       console.log(err);
     } else {
-      // console.log('new campground added: \n', campground);
+      console.log('new campground added: \n', camp);
       // redirect to campground post.
       res.redirect('/campgrounds');
     }
@@ -63,7 +69,7 @@ router.get('/:id', (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      // console.log('Campgroud requested: \n', campground);
+      console.log('Campgroud requested: \n', campground);
       // Rander show template with the campground.
       res.render('campgrounds/show', {
         campground,
