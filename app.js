@@ -12,7 +12,7 @@ const path = require('path');
 // const Campground = require('./models/campground');
 // const Comment = require('./models/comment');
 const User = require('./models/user');
-let seedDB = require('./seeds');
+// let seedDB = require('./seeds');
 
 const port = 4030;
 

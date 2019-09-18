@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
-let mongoose = require('mongoose');
-let Campground = require('./models/campground');
-let Comment = require('./models/comment');
+const mongoose = require('mongoose');
+const Campground = require('./models/campground');
+const Comment = require('./models/comment');
 
 function seedDB() {
   // Remove all campgrounds
