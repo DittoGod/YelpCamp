@@ -78,4 +78,8 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// EDIT Campground Route
+
+// Update Campground Route
+
 module.exports = router;
