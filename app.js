@@ -12,7 +12,7 @@ const path = require('path');
 // const Campground = require('./models/campground');
 // const Comment = require('./models/comment');
 const User = require('./models/user');
-// const seedDB = require('./seeds');
+let seedDB = require('./seeds');
 
 const port = 4030;
 
@@ -29,6 +29,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join('/public')));
 app.set('view engine', 'ejs');
+
+// seed database
 // seedDB();
 
 // Passport Configuration

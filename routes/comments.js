@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express');
 
 const router = express.Router({
@@ -42,8 +43,14 @@ router.post('/', isLoggedIn, (req, res) => {
         if (err) {
           console.log(err);
         } else {
+          const com = comment;
+          // add username and ID to comment
+          com.author.id = req.user._id;
+          com.author.username = req.user.username;
+          // save comment
+          comment.save();
           // connect new comment to campground
-          campground.comments.push(comment);
+          campground.comments.push(com);
           campground.save();
           // redirect to campground show page
           // eslint-disable-next-line no-underscore-dangle
