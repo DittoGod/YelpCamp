@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 const passport = require('passport');
-const User = require('../models/user').default;
+const User = require('../models/user');
 
 // route route
 router.get('/', (req, res) => {

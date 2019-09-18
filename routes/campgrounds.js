@@ -3,6 +3,15 @@ const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
 
+// Middleware
+// eslint-disable-next-line consistent-return
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
 // INDEX - Show all campgrounds.
 router.get('/', (req, res) => {
   // get all campgrounds from DB.
@@ -18,10 +27,12 @@ router.get('/', (req, res) => {
 });
 
 // CREATE - add new campground to DB.
-router.post('/', (req, res) => {
+router.post('/', isLoggedIn, (req, res) => {
   // get data from form and add to campgrounds array.
-  const { name } = req.body;
-  const { image } = req.body;
+  const {
+    name,
+    image,
+  } = req.body;
   const desc = req.body.description;
   const newCamp = {
     name,
@@ -41,7 +52,7 @@ router.post('/', (req, res) => {
 });
 
 // NEW - show form to create campground.
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('campgrounds/new');
 });
 
