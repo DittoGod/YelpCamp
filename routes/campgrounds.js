@@ -4,13 +4,31 @@ const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
 
+// =============
 // Middleware
+// =============
 // eslint-disable-next-line consistent-return
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');
+}
+
+function checkCampgroundOwnership(req, res, next) {
+  if (req.isAuthenticated()) {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+      if (err) {
+        res.redirect('back');
+      } else if (foundCampground.author.id.equals(req.user._id)) {
+        next();
+      } else {
+        res.redirect('back');
+      }
+    });
+  } else {
+    res.redirect('back');
+  }
 }
 
 // INDEX - Show all campgrounds.
@@ -85,22 +103,18 @@ router.get('/:id', (req, res) => {
 // =======================
 // EDIT Campground Route
 // =======================
-router.get('/:id/edit', (req, res) => {
-  Campground.findById(req.params.id, (err, campground) => {
-    if (err) {
-      res.redirect('/campgrounds');
-    } else {
-      res.render('campgrounds/edit', {
-        campground,
-      });
-    }
+router.get('/:id/edit', checkCampgroundOwnership, (req, res) => {
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    res.render('campgrounds/edit', {
+      campground: foundCampground,
+    });
   });
 });
 
 // =========================
 // Update Campground Route
 // =========================
-router.put('/:id', (req, res) => {
+router.put('/:id', checkCampgroundOwnership, (req, res) => {
   Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err) => {
     if (err) {
       res.redirect('/campgrounds');
@@ -113,7 +127,7 @@ router.put('/:id', (req, res) => {
 // =======================
 // Destroy Campgroud Route
 // =======================
-router.delete('/:id', (req, res) => {
+router.delete('/:id', checkCampgroundOwnership, (req, res) => {
   Campground.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       res.redirect(`/${req.params.id}`);
