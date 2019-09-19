@@ -8,8 +8,6 @@ const Campground = require('../models/campground');
 const Comment = require('../models/comment');
 const middleware = require('../middleware');
 
-// TODO: add authentication to camment update and delete.
-
 // ====================
 // Create new comment
 // ====================
