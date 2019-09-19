@@ -37,6 +37,7 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
   }
 };
 
+// eslint-disable-next-line consistent-return
 middlewareObj.isLoggedIn = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
