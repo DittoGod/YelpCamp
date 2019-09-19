@@ -26,8 +26,9 @@ router.get('/', (req, res) => {
     }
   });
 });
-
+// ===================================
 // CREATE - add new campground to DB.
+// ===================================
 router.post('/', isLoggedIn, (req, res) => {
   // get data from form and add to campgrounds array.
   const {
@@ -56,13 +57,16 @@ router.post('/', isLoggedIn, (req, res) => {
     }
   });
 });
-
+// =========================================
 // NEW - show form to create campground.
+// =========================================
 router.get('/new', isLoggedIn, (req, res) => {
   res.render('campgrounds/new');
 });
 
+// =======
 // SHOW
+// =======
 router.get('/:id', (req, res) => {
   // Find campground with provided ID.
   Campground.findById(req.params.id).populate('comments').exec((err, campground) => {
@@ -78,8 +82,45 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// =======================
 // EDIT Campground Route
+// =======================
+router.get('/:id/edit', (req, res) => {
+  Campground.findById(req.params.id, (err, campground) => {
+    if (err) {
+      res.redirect('/campgrounds');
+    } else {
+      res.render('campgrounds/edit', {
+        campground,
+      });
+    }
+  });
+});
 
+// =========================
 // Update Campground Route
+// =========================
+router.put('/:id', (req, res) => {
+  Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err) => {
+    if (err) {
+      res.redirect('/campgrounds');
+    } else {
+      res.redirect(`/campgrounds/${req.params.id}`);
+    }
+  });
+});
+
+// =======================
+// Destroy Campgroud Route
+// =======================
+router.delete('/:id', (req, res) => {
+  Campground.findByIdAndRemove(req.params.id, (err) => {
+    if (err) {
+      res.redirect(`/${req.params.id}`);
+    } else {
+      res.redirect('/campgrounds');
+    }
+  });
+});
 
 module.exports = router;
