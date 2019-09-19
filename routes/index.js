@@ -23,10 +23,11 @@ router.post('/register', (req, res) => {
   // eslint-disable-next-line consistent-return
   User.register(newUser, req.body.password, (err) => {
     if (err) {
-      console.log(err);
-      return res.render('register');
+      req.flash('error', 'A user with the given username is already registered');
+      return res.redirect('/register');
     }
     passport.authenticate('local')(req, res, () => {
+      req.flash('success', `Successfully registered ${req.body.username}`);
       res.redirect('/campgrounds');
     });
   });
@@ -46,16 +47,8 @@ router.post('/login', passport.authenticate('local', {
 // logout route
 router.get('/logout', (req, res) => {
   req.logOut();
+  req.flash('success', 'Logged you out!');
   res.redirect('/campgrounds');
 });
-
-// Middleware
-// eslint-disable-next-line consistent-return
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
 
 module.exports = router;

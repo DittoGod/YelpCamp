@@ -4,6 +4,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
 
 const app = express();
 const passport = require('passport');
@@ -38,6 +39,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
+app.use(flash());
 // seedDB();
 
 // =======================
@@ -55,6 +57,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
   next();
 });
 
@@ -70,8 +74,10 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 // ==============
 app.listen(port, (err) => {
   if (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   } else {
+    // eslint-disable-next-line no-console
     console.log('YelpCamp server has started.');
   }
 });

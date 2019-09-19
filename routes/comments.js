@@ -16,7 +16,7 @@ const middleware = require('../middleware');
 router.get('/new', middleware.isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
-      console.log(err);
+      req.flash('error', 'Cannot create a comment.');
     } else {
       res.render('comments/new', {
         campground,
@@ -32,14 +32,15 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   // lookup campground using ID
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
-      console.log(err);
+      req.flash('error', 'Unable to locate campground.');
       res.redirect('/campgrounds');
     } else {
       // create new comment
       // eslint-disable-next-line no-shadow
       Comment.create(req.body.comment, (err, comment) => {
         if (err) {
-          console.log(err);
+          req.flash('error', 'Unable to post create comment.');
+          res.redirect('back');
         } else {
           const com = comment;
           // add username and ID to comment
@@ -52,6 +53,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
           campground.save();
           // redirect to campground show page
           // eslint-disable-next-line no-underscore-dangle
+          req.flash('success', 'Comment successfully posted.');
           res.redirect(`/campgrounds/${campground._id}`);
         }
       });
@@ -65,6 +67,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
   Comment.findById(req.params.comment_id, (err, foundComment) => {
     if (err) {
+      req.flash('error', 'You cannot edit this comment.');
       res.redirect('back');
     } else {
       res.render('comments/edit', {
@@ -81,8 +84,10 @@ router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => 
 router.put('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err) => {
     if (err) {
+      req.flash('error', 'You cannot update this comment.');
       res.redirect('back');
     } else {
+      req.flash('success', 'Comment successfully updated.');
       res.redirect(`/campgrounds/${req.params.id}`);
     }
   });
@@ -94,8 +99,10 @@ router.put('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
 router.delete('/:comment_id', middleware.checkCommentOwnership, (req, res) => {
   Comment.findByIdAndRemove(req.params.comment_id, (err) => {
     if (err) {
+      req.flash('error', 'Cannot delete this comment.');
       res.redirect('back');
     } else {
+      req.flash('success', 'Comment successfully deleted.');
       res.redirect(`/campgrounds/${req.params.id}`);
     }
   });

@@ -10,7 +10,8 @@ router.get('/', (req, res) => {
   // get all campgrounds from DB.
   Campground.find({}, (err, campgrounds) => {
     if (err) {
-      console.log(err);
+      req.flash('error', 'Cannot connect to database.');
+      res.redirect('back');
     } else {
       res.render('campgrounds/index', {
         campgrounds,
@@ -41,9 +42,10 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   // create new campground and save to DB.
   Campground.create(newCamp, (err, camp) => {
     if (err) {
-      console.log(err);
+      req.flash('error', '[Post Error], you cannot do that');
+      res.redirect('back');
     } else {
-      console.log('new campground added: \n', camp);
+      req.flash('success', `new campground added:  ${camp.name}`);
       // redirect to campground post.
       res.redirect('/campgrounds');
     }
@@ -63,9 +65,9 @@ router.get('/:id', (req, res) => {
   // Find campground with provided ID.
   Campground.findById(req.params.id).populate('comments').exec((err, campground) => {
     if (err) {
-      console.log(err);
+      req.flash('error', 'Cannot find campground.');
+      res.redirect('back');
     } else {
-      console.log('Campgroud requested: \n', campground);
       // Rander show template with the campground.
       res.render('campgrounds/show', {
         campground,
@@ -89,10 +91,12 @@ router.get('/:id/edit', middleware.checkCampgroundOwnership, (req, res) => {
 // Update Campground Route
 // =========================
 router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err) => {
+  Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, foundCamp) => {
     if (err) {
+      req.flash('error', 'You need to be loggedin to update a campgrond.');
       res.redirect('/campgrounds');
     } else {
+      req.flash('success', `${foundCamp.name} has been successfully upated.`);
       res.redirect(`/campgrounds/${req.params.id}`);
     }
   });
@@ -102,10 +106,12 @@ router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
 // Destroy Campgroud Route
 // =======================
 router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
-  Campground.findByIdAndRemove(req.params.id, (err) => {
+  Campground.findByIdAndRemove(req.params.id, (err, foundCamp) => {
     if (err) {
+      req.flash('error', 'You need to be own the campgrond inorder to delete.');
       res.redirect(`/${req.params.id}`);
     } else {
+      req.flash('success', `${foundCamp.name} has been successfully deleted.`);
       res.redirect('/campgrounds');
     }
   });
