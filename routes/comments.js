@@ -7,6 +7,8 @@ const router = express.Router({
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
 
+// TODO: add authentication to camment update and delete.
+
 // ============
 // Middleware
 // ============
