@@ -64,9 +64,9 @@ router.get('/new', middleware.isLoggedIn, (req, res) => {
 router.get('/:id', (req, res) => {
   // Find campground with provided ID.
   Campground.findById(req.params.id).populate('comments').exec((err, campground) => {
-    if (err) {
+    if (err || !campground) {
       req.flash('error', 'Cannot find campground.');
-      res.redirect('back');
+      res.redirect('/campgrounds');
     } else {
       // Rander show template with the campground.
       res.render('campgrounds/show', {

@@ -63,16 +63,23 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 // Edit Comment Route
 // ===================
 router.get('/:comment_id/edit', middleware.checkCommentOwnership, (req, res) => {
-  Comment.findById(req.params.comment_id, (err, foundComment) => {
-    if (err) {
-      req.flash('error', 'You cannot edit this comment.');
-      res.redirect('back');
-    } else {
-      res.render('comments/edit', {
-        comment: foundComment,
-        campground_id: req.params.id,
-      });
+  // eslint-disable-next-line consistent-return
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err || !foundCampground) {
+      req.flash('error', 'Cannot find campground.');
+      return res.redirect('back');
     }
+    Comment.findById(req.params.comment_id, (err_, foundComment) => {
+      if (err_ || !foundComment) {
+        req.flash('error', 'You cannot edit this comment.');
+        res.redirect('back');
+      } else {
+        res.render('comments/edit', {
+          comment: foundComment,
+          campground_id: req.params.id,
+        });
+      }
+    });
   });
 });
 
