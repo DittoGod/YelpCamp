@@ -19,7 +19,7 @@ const methodOverride = require('method-override');
 const User = require('./models/user');
 // let seedDB = require('./seeds');
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4030;
 const ip = process.env.IP;
 
 // ==================
