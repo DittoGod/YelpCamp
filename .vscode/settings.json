@@ -24,5 +24,8 @@
         "activityBar.background": "#15322E",
         "titleBar.activeBackground": "#1D4740",
         "titleBar.activeForeground": "#F7FCFB"
-    }
+    },
+    "editor.fontFamily": " 'Cascadia Code'",
+    "editor.fontSize": 15,
+    "editor.fontLigatures": true
 }
