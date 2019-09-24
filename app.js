@@ -19,7 +19,7 @@ const methodOverride = require('method-override');
 const User = require('./models/user');
 // let seedDB = require('./seeds');
 
-const port = 4030;
+const port = 8080;
 // ==================
 // REQUIRING routes
 // ==================
