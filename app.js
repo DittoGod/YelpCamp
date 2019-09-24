@@ -30,7 +30,8 @@ const indexRoutes = require('./routes/index');
 // ==============
 // Setup Server
 // ==============
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {
+
+mongoose.connect('mongodb+srv://<username>:<password>@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
