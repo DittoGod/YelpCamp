@@ -20,6 +20,8 @@ const User = require('./models/user');
 // let seedDB = require('./seeds');
 
 const port = process.env.PORT;
+const ip = process.env.IP;
+
 // ==================
 // REQUIRING routes
 // ==================
@@ -31,7 +33,10 @@ const indexRoutes = require('./routes/index');
 // Setup Server
 // ==============
 
-mongoose.connect('mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority', {
+// "mongodb://localhost:27017/yelp_camp"
+// "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
