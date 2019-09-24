@@ -19,7 +19,7 @@ const methodOverride = require('method-override');
 const User = require('./models/user');
 // let seedDB = require('./seeds');
 
-const port = 8080;
+const port = process.env.PORT;
 // ==================
 // REQUIRING routes
 // ==================
@@ -80,6 +80,6 @@ app.listen(port, (err) => {
     console.log(err);
   } else {
     // eslint-disable-next-line no-console
-    console.log('YelpCamp server has started.');
+    console.log(`YelpCamp server has started on port ${process.env.PORT}`);
   }
 });
