@@ -31,7 +31,7 @@ const indexRoutes = require('./routes/index');
 // Setup Server
 // ==============
 
-mongoose.connect('mongodb+srv://yelpman:Parad15e-L0st2001!@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
