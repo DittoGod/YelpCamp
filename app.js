@@ -39,7 +39,9 @@ const indexRoutes = require('./routes/index');
 
 mongoose.connect(db, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
 });
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -67,6 +69,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
+  app.locals.moment = require('moment');
   next();
 });
 
