@@ -1,25 +1,26 @@
 <% include ../partials/header %>
 
-<div class="container">
-  <div class="row">
-    <h1 style="text-align: center;">Edit <%= campground.name %></h1>
-    <div style="width: 30%; margin: 30px auto;">
-      <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="post">
-        <div class="form-group">
-          <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>" placeholder="name">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>" placeholder="image url">
-        </div>
-        <div class="form-group">
-          <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>" placeholder="description">
-        </div>
-        <div class="form-group">
-          <button class="btn btn-lrg btn-primary btn-block" type="submit"> submit </button>
-        </div>
-      </form>
-      <a href="/campgrounds/<%= campground._id %>">Go Back</a>
-    </div>
+<div class="row">
+  <h1 style="text-align: center;">Edit <%= campground.name %></h1>
+  <div style="width: 30%; margin: 30px auto;">
+    <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="post">
+      <div class="form-group">
+        <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>"
+          placeholder="name">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>"
+          placeholder="image url">
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>"
+          placeholder="description">
+      </div>
+      <div class="form-group">
+        <button class="btn btn-lrg btn-primary btn-block" type="submit"> submit </button>
+      </div>
+    </form>
+    <a href="/campgrounds/<%= campground._id %>">Go Back</a>
   </div>
 </div>
 

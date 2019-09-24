@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
 
 // Will display the Sign Up page
 router.get('/register', (req, res) => {
-  res.render('register');
+  res.render('register', {
+    page: 'register'
+  });
 });
 
 // ==============================
@@ -40,7 +42,9 @@ router.post('/register', (req, res) => {
 // Will display the login page
 // =============================
 router.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {
+    page: 'login'
+  });
 });
 
 // =========================

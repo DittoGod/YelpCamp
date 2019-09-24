@@ -5,7 +5,9 @@ const router = express.Router();
 const Campground = require('../models/campground');
 const middleware = require('../middleware');
 
+// ==============================
 // INDEX - Show all campgrounds.
+// ==============================
 router.get('/', (req, res) => {
   // get all campgrounds from DB.
   Campground.find({}, (err, campgrounds) => {
@@ -15,10 +17,12 @@ router.get('/', (req, res) => {
     } else {
       res.render('campgrounds/index', {
         campgrounds,
+        page: 'campgrounds',
       });
     }
   });
 });
+
 // ===================================
 // CREATE - add new campground to DB.
 // ===================================
