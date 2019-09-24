@@ -31,6 +31,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   const {
     name,
     image,
+    cost,
     description,
   } = req.body;
   const author = {
@@ -40,6 +41,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   const newCamp = {
     name,
     image,
+    cost,
     description,
     author,
   };
