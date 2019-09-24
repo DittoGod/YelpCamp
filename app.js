@@ -21,6 +21,7 @@ const User = require('./models/user');
 
 const port = process.env.PORT || 4030;
 const ip = process.env.IP;
+const db = process.env.DATABASEURL;
 
 // ==================
 // REQUIRING routes
@@ -36,7 +37,7 @@ const indexRoutes = require('./routes/index');
 // "mongodb://localhost:27017/yelp_camp"
 // "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
 
-mongoose.connect(process.env.DATABASEURL, {
+mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -79,12 +80,12 @@ app.use('/campgrounds/:id/comments', commentRoutes);
 // ==============
 // Start Server
 // ==============
-app.listen(port, (err) => {
+app.listen(port, ip, (err) => {
   if (err) {
     // eslint-disable-next-line no-console
     console.log(err);
   } else {
     // eslint-disable-next-line no-console
-    console.log(`YelpCamp server has started on port ${process.env.PORT}`);
+    console.log(`YelpCamp server has started on port: ${port} and ip: ${ip}`);
   }
 });
