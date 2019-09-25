@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 // Will display the Sign Up page
 router.get('/register', (req, res) => {
   res.render('register', {
-    page: 'register'
+    page: 'register',
   });
 });
 
@@ -25,6 +25,9 @@ router.post('/register', (req, res) => {
   const newUser = new User({
     username: req.body.username,
   });
+  if (req.body.adminCode === 'secretcode123') {
+    newUser.isAdmin = true;
+  }
   // eslint-disable-next-line consistent-return
   User.register(newUser, req.body.password, (err) => {
     if (err) {
@@ -43,7 +46,7 @@ router.post('/register', (req, res) => {
 // =============================
 router.get('/login', (req, res) => {
   res.render('login', {
-    page: 'login'
+    page: 'login',
   });
 });
 
