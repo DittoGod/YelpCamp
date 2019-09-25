@@ -123,6 +123,7 @@ router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
       req.flash('error', 'Invalid address');
       res.redirect('back');
     }
+    // console.log(req.body.campground);
     req.body.campground.lat = data[0].latitude;
     req.body.campground.lng = data[0].longitude;
     req.body.campground.location = data[0].formattedAddress;
