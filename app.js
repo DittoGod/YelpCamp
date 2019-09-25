@@ -1,6 +1,7 @@
 // =========
 // Imports
 // =========
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -12,6 +13,7 @@ const LocalStratagy = require('passport-local');
 const session = require('express-session');
 const path = require('path');
 const methodOverride = require('method-override');
+const moment = require('moment');
 
 // =========
 // Models
@@ -30,18 +32,14 @@ const commentRoutes = require('./routes/comments');
 const campgroundRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
-// ==============
+// ==============  "mongodb://localhost:27017/yelp_camp"
 // Setup Server
-// ==============
-
-// "mongodb://localhost:27017/yelp_camp"
-// "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
-
+// ==============  "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
 mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  useCreateIndex: true
+  useCreateIndex: true,
 });
 app.use(bodyParser.urlencoded({
   extended: true,
@@ -69,7 +67,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
-  app.locals.moment = require('moment');
+  app.locals.moment = moment;
   next();
 });
 

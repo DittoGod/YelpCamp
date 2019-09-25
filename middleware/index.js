@@ -11,7 +11,7 @@ middlewareObj.checkCommentOwnership = (req, res, next) => {
         req.flash('error', 'Comment not found.');
         res.redirect('back');
         // Does user own comment?
-      } else if (foundComment.author.id.equals(req.user._id)) {
+      } else if (foundComment.author.id.equals(req.user._id) || req.user.isAdmin) {
         next();
       } else {
         req.flash('error', 'You dont have the permision to delete this comment.');
@@ -30,7 +30,7 @@ middlewareObj.checkCampgroundOwnership = (req, res, next) => {
       if (err || !foundCampground) {
         req.flash('error', 'Unable to find campground.');
         res.redirect('back');
-      } else if (foundCampground.author.id.equals(req.user._id)) {
+      } else if (foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) {
         next();
       } else {
         req.flash('error', 'You don\'t have permission for this campground.');

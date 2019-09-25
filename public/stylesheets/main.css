@@ -10,6 +10,12 @@
     display: inline;
 }
 
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 .hideMe {
     -moz-animation: cssAnimation 0s ease-in 3s forwards;
     /* Firefox */
