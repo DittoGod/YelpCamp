@@ -13,7 +13,7 @@ const passport = require('passport');
 const LocalStratagy = require('passport-local');
 const session = require('express-session');
 const coockieParser = require('cookie-parser');
-// const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const methodOverride = require('method-override');
 const moment = require('moment');
@@ -39,6 +39,10 @@ const indexRoutes = require('./routes/index');
 // ==============  "mongodb://localhost:27017/yelp_camp"
 // Setup Server
 // ==============  "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
+const store = new MongoStore({
+  url: db,
+  collection: 'mySessions',
+});
 mongoose.connect(db, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -64,6 +68,11 @@ app.use(require('express-session')({
   secret: 'The World Ends With You.',
   resave: false,
   saveUninitialized: false,
+  // cookie: {
+    // secure: true,
+    // maxAge: 600000,
+  // },
+  store,
 }));
 
 app.use(passport.initialize());
@@ -72,6 +81,9 @@ passport.use(new LocalStratagy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
+  if (!req.session) {
+    next(new Error('Oh no!!'));
+  }
   res.locals.currentUser = req.user;
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
