@@ -73,10 +73,6 @@ app.use(require('express-session')({
   secret: 'The World Ends With You.',
   resave: false,
   saveUninitialized: false,
-  // cookie: {
-    // secure: true,
-    // maxAge: 600000,
-  // },
   store,
 }));
 
@@ -93,6 +89,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   res.locals.success = req.flash('success');
   app.locals.moment = moment;
+  app.locals.store = store;
   next();
 });
 
