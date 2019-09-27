@@ -15,6 +15,7 @@ const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const methodOverride = require('method-override');
 const moment = require('moment');
+const favicon = require('serve-favicon');
 
 // =========
 // Models
@@ -36,15 +37,17 @@ const indexRoutes = require('./routes/index');
 // ==============  "mongodb://localhost:27017/yelp_camp"
 // Setup Server
 // ==============  "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
-mongoose.connect(db);
+mongoose.connect(db, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true,
+});
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(flash());
@@ -62,8 +65,11 @@ app.use(session({
     secure: true,
   },
   store: new MongoStore({
-    url: process.env.DATABASEURL,
     useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true,
+    url: process.env.DATABASEURL,
   }),
 }));
 app.use(passport.initialize());
