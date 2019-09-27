@@ -5,24 +5,33 @@
   <div style="width: 30%; margin: 30px auto;">
     <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="post">
       <div class="form-group">
+        <label for="name">Name</label>
         <input class="form-control" type="text" name="campground[name]" value="<%= campground.name %>"
           placeholder="name">
       </div>
       <div class="form-group">
+        <label for="image">Image URL</label>
         <input class="form-control" type="text" name="campground[image]" value="<%= campground.image %>"
           placeholder="image url">
       </div>
-      <div class="form-group">
-        <input class="form-control" type="number" name="campground[cost]" value="<%= campground.cost %>" step="0.01"
-          min="0" placeholder="0.01" required>
+      <label for="cost">Price</label>
+      <div class="input-group">
+        <span class="input-group-addon">£</span>
+        <input style="text-align: right;" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="campground[cost]"
+          value="<%= campground.cost %>">
+        <!-- <span class="input-group-addon">.00</span> -->
       </div>
+      <br>
+      <label for="description">Description</label>
       <div class="form-group">
-        <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>"
-          placeholder="description">
+        <textarea class="md-textarea form-control" name="campground[description]" cols="30" rows="10"><%= campground.description %></textarea>
+        <!-- <input class="form-control" type="text" name="campground[description]" value="<%= campground.description %>"
+          placeholder="description"> -->
       </div>
       <div class="form-group">
         <label for="Location">Location</label>
-        <input class="form-control" type="text" name="campground[location]" id="location" value="<%= campground.location %>">
+        <input class="form-control" type="text" name="campground[location]" id="location"
+          value="<%= campground.location %>">
       </div>
       <div class="form-group">
         <button class="btn btn-lrg btn-primary btn-block" type="submit"> submit </button>

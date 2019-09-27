@@ -6,12 +6,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
+// const Float = require('mongoose-float').loadType(mongoose);
 
 const app = express();
 const passport = require('passport');
 const LocalStratagy = require('passport-local');
 const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
+const coockieParser = require('cookie-parser');
+// const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const methodOverride = require('method-override');
 const moment = require('moment');
@@ -50,6 +52,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(favicon(path.join(__dirname, '/public/images/favicon.ico')));
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
+app.use(coockieParser('secret'));
 app.use(flash());
 // seedDB();
 
@@ -57,21 +60,12 @@ app.use(flash());
 // Passport Configuration
 // =======================
 app.set('trust proxy', 1);
-app.use(session({
-  secret: 'The world ends with you.',
+app.use(require('express-session')({
+  secret: 'The World Ends With You.',
   resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: true,
-  },
-  store: new MongoStore({
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-    url: process.env.DATABASEURL,
-  }),
+  saveUninitialized: false,
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStratagy(User.authenticate()));

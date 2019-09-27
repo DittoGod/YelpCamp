@@ -16,6 +16,10 @@
     width: 100%;
 }
 
+textarea {
+    resize: none;
+}
+
 .hideMe {
     -moz-animation: cssAnimation 0s ease-in 3s forwards;
     /* Firefox */
