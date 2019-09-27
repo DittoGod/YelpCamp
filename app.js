@@ -39,6 +39,7 @@ const indexRoutes = require('./routes/index');
 // ==============  "mongodb://localhost:27017/yelp_camp"
 // Setup Server
 // ==============  "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
+mongoose.set('useCreateIndex', true);
 const store = new MongoStore({
   url: db,
   collection: 'mySessions',
@@ -47,12 +48,13 @@ const store = new MongoStore({
   touchAfter: 24 * 3600,
   resave: false,
   saveUninitialized: false,
+  // mongooseConnection: mongoose.connection,
 });
 mongoose.connect(db, {
+  useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
-  useCreateIndex: true,
 });
 app.use(bodyParser.urlencoded({
   extended: true,
