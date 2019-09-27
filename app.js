@@ -42,6 +42,11 @@ const indexRoutes = require('./routes/index');
 const store = new MongoStore({
   url: db,
   collection: 'mySessions',
+  autoRemove: 'native',
+  ttl: 24 * 3600,
+  touchAfter: 24 * 3600,
+  resave: false,
+  saveUninitialized: false,
 });
 mongoose.connect(db, {
   useNewUrlParser: true,
