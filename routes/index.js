@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
+const Campground = require('../models/campground');
 
 // route route
 router.get('/', (req, res) => {
@@ -22,8 +23,19 @@ router.get('/register', (req, res) => {
 // Will handle the signup logic.
 // ==============================
 router.post('/register', (req, res) => {
+  const {
+    username,
+    firstName,
+    lastName,
+    avatar,
+    email,
+  } = req.body;
   const newUser = new User({
-    username: req.body.username,
+    username,
+    firstName,
+    lastName,
+    email,
+    avatar,
   });
   if (req.body.adminCode === 'secretcode123') {
     newUser.isAdmin = true;
@@ -60,12 +72,36 @@ router.post('/login', passport.authenticate('local', {
   failureRedirect: '/login',
 }), () => {});
 
-// logout route
+// ===============
+// Logout Route
+// ===============
 router.get('/logout', (req, res) => {
   req.logOut();
   req.flash('success', 'Logged you out!');
   req.session.destroy();
   res.redirect('/campgrounds');
+});
+
+// ===============================
+// Will send to the profile page.
+// ===============================
+router.get('/users/:id', (req, res) => {
+  User.findById(req.params.id, (err, user) => {
+    if (err || !user) {
+      req.flash('error', 'Unable to find user.');
+      res.redirect('back');
+    } else {
+      Campground.find().where('author.id').equals(user.id).exec((_err, campgrounds) => {
+        if (_err) {
+          req.flash('error', err.message());
+        }
+        res.render('users/show', {
+          user,
+          campgrounds,
+        });
+      });
+    }
+  });
 });
 
 module.exports = router;
