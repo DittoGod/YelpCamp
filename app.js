@@ -27,7 +27,7 @@ const User = require('./models/user');
 
 const port = process.env.PORT || 4030;
 const ip = process.env.IP;
-const db = process.env.DATABASEURL;
+const db = process.env.DATABASE_URL;
 
 // ==================
 // REQUIRING routes
@@ -43,7 +43,7 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 const store = new MongoStore({
   url: db,
-  collection: 'mySessions',
+  collection: 'sessions',
   autoRemove: 'native',
   ttl: 24 * 3600,
   touchAfter: 24 * 3600,
