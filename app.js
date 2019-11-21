@@ -36,9 +36,9 @@ const commentRoutes = require('./routes/comments');
 const campgroundRoutes = require('./routes/campgrounds');
 const indexRoutes = require('./routes/index');
 
-// ==============  "mongodb://localhost:27017/yelp_camp"
+// ============== 
 // Setup Server
-// ==============  "mongodb+srv://yelpman:Parad15e-L0st2001@cluster0-h4ygo.mongodb.net/test?retryWrites=true&w=majority"
+// ============== 
 const store = new MongoStore({
   url: db,
   collection: 'mySessions',
