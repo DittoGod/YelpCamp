@@ -1,8 +1,5 @@
 #YelpCamp
 
-![wakatime Coding Activity](https://wakatime.com/share/@c4e6b26b-75ec-47f1-a075-fb5fcce0cbed/86729fe9-7f1a-4f57-904c-f5139e81f4e8.svg)
-![wakatime Languages](https://wakatime.com/share/@c4e6b26b-75ec-47f1-a075-fb5fcce0cbed/c100f6f0-0439-4b66-93d4-c9985f228e0c.svg)
-
 ##Initial Setup
 * Add Landing Page
 * Add Campgrounds Page that lists all campgrounds
